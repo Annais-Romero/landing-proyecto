@@ -1,0 +1,664 @@
+/* ==========================================================================
+   1. VARIABLES DE COLOR Y CONFIGURACIÓN GENERAL
+   ========================================================================== */
+:root {
+    --bg-global: #f3effa;
+    /* Fondo lila muy claro de la web */
+    --morado-oscuro: #4a1e4e;
+    /* Títulos principales y menú */
+    --lila-tarjetas: #c1b1df;
+    /* Color base de las tarjetas de info y skills */
+    --blanco: #ffffff;
+    --texto-oscuro: #2d2030;
+    --amarillo-cv: #f1c40f;
+    /* Amarillo de tu botón de descarga */
+    --gradiente-proyectos: linear-gradient(135deg, #c1b1df 0%, #fcd6b1 100%);
+    --sombra-soft: 8px 8px 16px rgba(74, 30, 78, 0.15),
+        -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+section {
+    scroll-margin-top: 80px; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-global);
+    color: var(--texto-oscuro);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN - LOGO PERSONALIZADO
+   ========================================================================== */
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;      /* 👈 AJUSTADO: Bajó de 65px a 50px para mantener simetría con la nueva escala global */
+    width: auto; 
+    display: block;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   2. BARRA DE NAVEGACIÓN (Sticky Navbar)
+   ========================================================================== */
+.header-nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgba(243, 239, 250, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 0 2px 10px rgba(74, 30, 78, 0.05);
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--morado-oscuro);
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--texto-oscuro);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: var(--morado-oscuro);
+    border-bottom: 2px solid var(--morado-oscuro);
+}
+
+/* ==========================================================================
+   3. SECCIÓN INICIO (HERO) CON EFECTO DE CAPAS (ACHICADO)
+   ========================================================================== */
+.seccion-hero {
+    position: relative;
+    min-height: 75vh;  /* 👈 AJUSTADO: Bajó de 85vh a 75vh para reducir el espacio vertical vacío */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 50px;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.hero-capa-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/cabezal-fondo.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.30;
+    filter: blur(2px);
+    z-index: 1;
+}
+
+.hero-contenido-flotante {
+    position: relative;
+    text-align: center;
+    max-width: 800px;
+    z-index: 10;
+}
+
+/* Avatar circular flotante optimizado */
+.hero-avatar-container {
+    width: 200px;   /* 👈 SOLUCIÓN: Ajustado a un tamaño intermedio y elegante de 200px */
+    height: 200px;  /* Debe mantenerse perfectamente cuadrado para no deformar el círculo */
+    background-color: var(--blanco);
+    border-radius: 50%;
+    margin: 0 auto 25px auto; 
+    padding: 8px;           
+    box-shadow: 0 6px 20px rgba(74, 30, 78, 0.18); 
+    overflow: hidden; 
+}
+
+.hero-avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.hero-contenido-flotante h1 {
+    font-size: 2.5rem; /* 👈 Sutil ajuste de tipografía para balancear la escala */
+    color: var(--morado-oscuro);
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.hero-contenido-flotante h2 {
+    font-size: 1.3rem;
+    color: var(--texto-oscuro);
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.hero-contenido-flotante p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #554557;
+}
+
+.btn-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--amarillo-cv);
+    color: var(--morado-oscuro);
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(241, 196, 15, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(241, 196, 15, 0.6);
+}
+
+/* ==========================================================================
+   4. ESTRUCTURA DE SECCIONES GENERALES
+   ========================================================================== */
+.seccion-bloque {
+    padding: 45px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titulo-seccion {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--morado-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* ==========================================================================
+   5. SECCIÓN SOBRE MÍ & TARJETAS DE INFORMACIÓN
+   ========================================================================== */
+#sobre-mi {
+    margin-bottom: 10px;    
+}
+
+.sobre-mi-caja-texto {
+    background-color: var(--blanco);
+    padding: 35px;
+    border-radius: 30px;
+    box-shadow: var(--sombra-soft);
+    margin-bottom: 65px; 
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.sobre-mi-caja-texto p:last-child {
+    margin-bottom: 0;
+}
+
+.tarjetas-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.card-info {
+    background-color: var(--lila-tarjetas);
+    border-radius: 25px;
+    padding: 40px 20px 25px 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--sombra-soft);
+}
+
+.card-info .icono-flotante {
+    position: absolute;
+    top: -30px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 60px;
+    background-color: var(--blanco);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(74, 30, 78, 0.15);
+}
+
+.card-info .icono-flotante i {
+    font-size: 1.5rem;
+}
+
+.card-info .icono-flotante .fa-location-dot { color: #e74c3c; }
+.card-info .icono-flotante .fa-language { color: #3498db; }
+.card-info .icono-flotante .fa-award { color: #2ecc71; }
+
+.card-info h3 {
+    color: var(--morado-oscuro);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.card-info p,
+.card-info ul {
+    font-size: 0.95rem;
+    list-style: none;
+    color: var(--morado-oscuro);
+    font-weight: 500;
+}
+
+.card-info ul li {
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   6. SECCIÓN HABILIDADES TÉCNICAS (Skills)
+   ========================================================================== */
+#habilidades {
+    padding-top: 15px; 
+    margin-top: 0px;   
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.card-skill {
+    background-color: var(--lila-tarjetas);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: var(--sombra-soft);
+}
+
+.card-skill h3 {
+    color: var(--morado-oscuro);
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(74, 30, 78, 0.15);
+    padding-bottom: 10px;
+}
+
+.card-skill ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.card-skill ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--morado-oscuro);
+    font-size: 1rem;
+}
+
+.card-skill ul li i {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   7. SECCIÓN MIS PROYECTOS (Diseño Profesional en Dos Columnas - Corregido)
+   ========================================================================== */
+.contenedor-proyectos-full {
+    background: var(--gradiente-proyectos);
+    border-radius: 40px;
+    padding: 40px;
+    box-shadow: var(--sombra-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* La tarjeta ahora distribuye el contenido de lado a lado */
+.card-proyecto-landing {
+    background-color: var(--blanco);
+    border-radius: 30px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(74, 30, 78, 0.08);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Un toque más de espacio a la imagen */
+    align-items: center;
+    gap: 40px;
+    transition: transform 0.3s ease;
+}
+
+.card-proyecto-landing:hover {
+    transform: translateY(-5px);
+}
+
+/* Contenedor de la Imagen: Conserva proporciones perfectas */
+.proyecto-preview-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3; 
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.slide-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.slide-img.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Ajustes para el bloque de texto (Derecha) */
+.proyecto-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.proyecto-info-box h3 {
+    font-size: 1.6rem;
+    color: var(--morado-oscuro);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.proyecto-info-box ul {
+    list-style: none;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.proyecto-info-box ul li {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
+    color: #444;
+}
+
+.proyecto-info-box ul li::before {
+    content: "•";
+    color: var(--morado-oscuro);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    top: -2px;
+}
+
+/* Contenedor de Botones alineados horizontalmente */
+.proyecto-botones-links {
+    display: flex;
+    justify-content: flex-start; /* Alineados a la izquierda junto al texto */
+    gap: 15px;
+}
+
+.btn-proyecto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f3d1b0 0%, #dfc7f3 100%);
+    color: var(--morado-oscuro);
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(74, 30, 78, 0.1);
+    border: 1px solid rgba(74, 30, 78, 0.1);
+    transition: all 0.2s ease;
+}
+
+.btn-proyecto-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(74, 30, 78, 0.2);
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 992px) {
+    .card-proyecto-landing {
+        grid-template-columns: 1fr;
+        padding: 25px;
+        gap: 25px;
+    }
+    
+    .proyecto-botones-links {
+        justify-content: center; /* En móviles queda más lindo centrado */
+    }
+}
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+footer {
+    background-color: var(--morado-oscuro);
+    color: var(--blanco);
+    padding: 20px 25px; 
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    flex-wrap: wrap; 
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+footer i {
+    color: #e74c3c; 
+}
+
+.logo-footer a {
+    display: flex;
+    align-items: center;
+}
+
+.logo-footer img {
+    height: 45px;      
+    width: auto;       
+    display: block;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-footer img:hover {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   9. OPTIMIZACIÓN MÓVIL (Responsive Design)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .tarjetas-info-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .seccion-hero {
+        padding: 40px 20px;
+    }
+
+    .hero-contenido-flotante h1 {
+        font-size: 2.2rem;
+    }
+
+    .seccion-bloque {
+        padding: 60px 20px;
+    }
+
+    .card-skill ul {
+        grid-template-columns: 1fr;
+    }
+
+    .contenedor-proyectos-full {
+        padding: 30px 15px;
+    }
+    
+    .proyecto-preview-box {
+        height: 240px; /* Reducción de la altura del carrusel en celulares */
+    }
+}
+
+/* ==========================================================================
+   10. COLORES PERSONALIZADOS PARA ICONOS DE TECNOLOGÍAS
+   ========================================================================== */
+.card-skill ul li i.icon-js { color: #f7df1e; }
+.card-skill ul li i.icon-angular { color: #dd0031; }
+.card-skill ul li i.icon-html { color: #e34f26; }
+.card-skill ul li i.icon-bootstrap { color: #7952b3; }
+.card-skill ul li i.icon-database { color: #00758f; }
+.card-skill ul li i.icon-github { color: #181717; }
+.card-skill ul li i.icon-vial { color: #9b59b6; }
+.card-skill ul li i.icon-robot { color: #2ecc71; }
+.card-skill ul li i.icon-gauge { color: #e67e22; }
+.card-skill ul li i.icon-sonar { color: #34495e; }
+.card-skill ul li i.icon-test { color: #3498db; }
+
+/* ==========================================================================
+   11. SECCIÓN CONTACTO
+   ========================================================================== */
+.contacto-intro {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.05rem;
+    color: #554557;
+}
+
+.card-contacto {
+    background-color: var(--blanco);
+    border-radius: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 35px;
+    box-shadow: var(--sombra-soft);
+}
+
+#form-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 15px;
+    border: 1px solid var(--lila-tarjetas);
+    background-color: #faf8fd; 
+    outline: none;
+    font-size: 1rem;
+    color: var(--texto-oscuro);
+    transition: all 0.3s ease;
+}
+
+.input-group textarea {
+    resize: none; 
+    font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: var(--morado-oscuro);
+    background-color: var(--blanco);
+    box-shadow: 0 0 8px rgba(74, 30, 78, 0.15);
+}
+
+.btn-enviar {
+    background-color: var(--morado-oscuro);
+    color: var(--blanco);
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    align-self: center; 
+    box-shadow: 0 4px 12px rgba(74, 30, 78, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #5c2761; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(74, 30, 78, 0.3);
+}
+
+.btn-enviar:active {
+    transform: translateY(0);
+}
